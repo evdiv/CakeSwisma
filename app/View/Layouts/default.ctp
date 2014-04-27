@@ -48,12 +48,28 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                         |
                     <?php echo $this->Html->link('Add role', array('controller' => 'roles', 'action' => 'add')); ?>
                     <?php echo $this->Html->link('All roles', array('controller' => 'roles', 'action' => 'index')); ?>                         
+                        |
+                    <?php echo $this->Html->link('Add category', array('controller' => 'categories', 'action' => 'add')); ?>
+                    <?php echo $this->Html->link('All categories', array('controller' => 'categories', 'action' => 'index')); ?>                  
+                        |
+                    <?php echo $this->Html->link('Add page', array('controller' => 'pages', 'action' => 'add')); ?>
+                    <?php echo $this->Html->link('All pages', array('controller' => 'pages', 'action' => 'all')); ?>  
+                        |
+                    <?php echo $this->Html->link('Add post', array('controller' => 'posts', 'action' => 'add')); ?>
+                    <?php echo $this->Html->link('All posts', array('controller' => 'posts', 'action' => 'index')); ?>  
+                         |
+                    <?php echo $this->Html->link('Add question', array('controller' => 'questions', 'action' => 'add')); ?>
+                    <?php echo $this->Html->link('All questions', array('controller' => 'questions', 'action' => 'index')); ?>                        
                 </div>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
+                    
+                    
+                    
+                    
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(

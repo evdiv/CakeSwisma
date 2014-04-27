@@ -4,7 +4,8 @@
  * @author Eugene
  */
 class Page extends AppModel {
-    
+    public $belongsTo = 'User';
+            
 }
 
 ?>
