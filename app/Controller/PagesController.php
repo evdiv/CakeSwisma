@@ -9,6 +9,23 @@ class PagesController extends AppController {
             
             $this->loadModel('Post');
             $this->set('posts', $this->Post->find('all'));
+            
+            $this->loadModel('Question');
+            $this->set('questions', $this->Question->find('all', array(
+                'limit' => 10,
+                'order' => 'Question.created DESC'
+            )));
+            $this->set('categories', $this->Question->Category->find('list'));
+            
+            //Just for test create question form handler
+            if($this->request->is('post')) {
+                $this->Question->create();
+                if($this->Question->save($this->request->data)) {
+                    $this->Session->setFlash(__('The Question has been added'));
+                    return $this->redirect(array('action' => 'index'));
+                }
+                $this->Session->setFlash(__('Unable to add new question'));
+            }
         }
         
         public function all() {

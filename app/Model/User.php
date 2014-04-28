@@ -1,7 +1,12 @@
 <?php
 /**
- * CakePHP Model Post
- * @author Eugene
+ * User Model
+ *
+ * PHP version 5.5
+ *
+ * @category Model
+ * @version  1.0
+ * @author   Eugene <vakuka@gmail.com>
  */
 class User extends AppModel {
     public $belongsTo = 'Role';
@@ -16,8 +21,16 @@ class User extends AppModel {
         ), 
          'Question' => array(
             'className' => 'Question',
-            'foreignKey' => 'question_id'
-        )     
+            'foreignKey' => 'user_id'
+        ),
+        'Answer' => array(
+            'className' => 'Answer',
+            'foreignKey' => 'user_id'
+        ),
+        'Comment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'user_id'
+        )
     );
 }
 

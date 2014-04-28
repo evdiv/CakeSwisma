@@ -1,21 +1,19 @@
-<?php //echo '<pre>', print_r($questions), '</pre>';?>
-<h1>Questions</h1>
+<h1>Answers</h1>
 
 <table>
     <tr>
         <th>Id</th>
-        <th>Title</th>
+        <th>Question</th>
         <th>User Name</th>
-        <th>Category</th>       
+        <th>Content</th>       
         <th>Created</th> 
-        <th>Views</th>  
-        <th>Answers</th>        
+        <th>Views</th>        
     </tr>
 
 
-    <?php foreach ($questions as $question): ?>
+    <?php foreach ($answers as $answer): ?>
     <tr>
-        <td><?php echo $question['Question']['id']; ?></td>
+        <td><?php echo $answer['Question']['id']; ?></td>
         
         <td><?php echo $this->Html->link($question['Question']['title'], 
                 array('controller' => 'questions', 'action' => 'view', 
@@ -24,10 +22,8 @@
         <td><?php echo $question['User']['full_name']; ?></td> 
         <td><?php echo $question['Category']['title']; ?></td>            
         <td><?php echo $question['Question']['created']; ?></td>           
-        <td><?php echo $question['Question']['views']; ?></td>        
-        <td><?php echo count($question['Answer']); ?></td>     
- 
-        
+        <td><?php echo $question['Question']['views']; ?></td>   
+         
     </tr>
     <?php endforeach; ?>
     

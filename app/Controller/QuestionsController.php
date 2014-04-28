@@ -16,7 +16,7 @@ class QuestionsController extends AppController {
                 $this->Question->create();
                 if($this->Question->save($this->request->data)) {
                     $this->Session->setFlash(__('The Question has been added'));
-                    return $this->redirect(array('action' => 'all'));
+                    return $this->redirect(array('action' => 'index'));
                 }
                 $this->Session->setFlash(__('Unable to add new question'));
             }
@@ -31,6 +31,14 @@ class QuestionsController extends AppController {
             if(!$question) {
                 throw new NotFoundException(__('Invalid question'));
             }
-            $this->set('question', $question);  
+            if($this->request->is('post')) {
+                $this->Question->Answer->create();
+                if($this->Question->Answer->save($this->request->data)) {
+                    $this->Session->setFlash(__('Your Answer has been added'));
+                    return $this->redirect(array('action' => 'view', $id));  
+                }
+                $this->Session->setFlash(__('Unable to add Answer'));
+            }
+            $this->set('question', $question);              
         }
 }

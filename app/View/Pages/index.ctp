@@ -1,4 +1,4 @@
-<?php $this->extend('/Common/view'); ?>
+<?php $this->extend('/Common/home'); ?>
 
 <?php $this->assign('page_title', $page['Page']['title']); ?>
 
@@ -11,3 +11,9 @@
     
     $this->end(); ?>
 
+<?php $this->start('questions');
+
+    echo $this->element('questions/recent_questions', $questions);
+    echo $this->element('questions/add_question');
+    
+    $this->end(); ?>

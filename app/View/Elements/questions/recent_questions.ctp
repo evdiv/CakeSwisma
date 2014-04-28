@@ -1,5 +1,4 @@
-<?php //echo '<pre>', print_r($questions), '</pre>';?>
-<h1>Questions</h1>
+<h1>Question</h1>
 
 <table>
     <tr>
@@ -8,7 +7,6 @@
         <th>User Name</th>
         <th>Category</th>       
         <th>Created</th> 
-        <th>Views</th>  
         <th>Answers</th>        
     </tr>
 
@@ -24,10 +22,8 @@
         <td><?php echo $question['User']['full_name']; ?></td> 
         <td><?php echo $question['Category']['title']; ?></td>            
         <td><?php echo $question['Question']['created']; ?></td>           
-        <td><?php echo $question['Question']['views']; ?></td>        
-        <td><?php echo count($question['Answer']); ?></td>     
- 
-        
+        <td><?php echo count($question['Answer']); ?></td>   
+         
     </tr>
     <?php endforeach; ?>
     

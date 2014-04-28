@@ -60,15 +60,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                          |
                     <?php echo $this->Html->link('Add question', array('controller' => 'questions', 'action' => 'add')); ?>
                     <?php echo $this->Html->link('All questions', array('controller' => 'questions', 'action' => 'index')); ?>                        
+                         |
+                    <?php echo $this->Html->link('Add answer', array('controller' => 'answers', 'action' => 'add')); ?>               
                 </div>
-		<div id="content">
-
+		<div id="content" style="width:1250px; margin:0 auto;">
+                    
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
-                    
-                    
-                    
                     
 		</div>
 		<div id="footer">

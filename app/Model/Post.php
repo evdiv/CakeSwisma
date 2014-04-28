@@ -1,7 +1,12 @@
 <?php
 /**
- * CakePHP Model Post
- * @author Eugene
+ * Post Model
+ *
+ * PHP version 5.5
+ *
+ * @category Model
+ * @version  1.0
+ * @author   Eugene <vakuka@gmail.com>
  */
 class Post extends AppModel {
     public $belongsTo = array(
