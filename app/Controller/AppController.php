@@ -33,4 +33,9 @@ class AppController extends Controller {
            'Form',
            'Session'
    );
+   
+   public function beforeRender() {
+            $this->loadModel('Post');
+            $this->set('posts', $this->Post->find('all'));
+   }
 }

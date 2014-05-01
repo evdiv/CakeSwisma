@@ -24,6 +24,11 @@ class Question extends AppModel {
                 'className' => 'Answer',
                 'foreignKey' => 'question_id'
              
+            ),
+            'Comment' => array(
+                'className' => 'Comment',
+                'foreignKey' => 'question_id'
             )
         );
+        
 }

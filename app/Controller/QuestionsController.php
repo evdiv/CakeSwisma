@@ -9,9 +9,6 @@ class QuestionsController extends AppController {
              'limit' => 10,
              'order' => 'Question.created DESC'
             )));
-        }
-        
-        public function add() {
             if($this->request->is('post')) {
                 $this->Question->create();
                 if($this->Question->save($this->request->data)) {
@@ -32,13 +29,23 @@ class QuestionsController extends AppController {
                 throw new NotFoundException(__('Invalid question'));
             }
             if($this->request->is('post')) {
-                $this->Question->Answer->create();
-                if($this->Question->Answer->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your Answer has been added'));
-                    return $this->redirect(array('action' => 'view', $id));  
-                }
-                $this->Session->setFlash(__('Unable to add Answer'));
+                if(isset($this->request->data['Answer'])) {
+                    $this->Question->Answer->create();
+                        if($this->Question->Answer->save($this->request->data)) {
+                            $this->Session->setFlash(__('Your Answer has been added'));
+                            return $this->redirect(array('action' => 'view', $id));  
+                        }
+                        $this->Session->setFlash(__('Unable to add Answer'));
+                        
+                }elseif (isset($this->request->data['Comment'])) {
+                    $this->Question->Answer->Comment->create();
+                        if($this->Question->Answer->Comment->save($this->request->data)) {
+                            $this->Session->setFlash(__('Your Comment has been added'));
+                            return $this->redirect(array('action' => 'view', $id));  
+                        }
+                        $this->Session->setFlash(__('Unable to add Comment'));
+                 }
             }
-            $this->set('question', $question);              
+            $this->set('question', $question);               
         }
 }

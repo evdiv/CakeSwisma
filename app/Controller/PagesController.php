@@ -7,9 +7,6 @@ class PagesController extends AppController {
         public function index() {
             $this->set('page', $this->Page->find('first'));
             
-            $this->loadModel('Post');
-            $this->set('posts', $this->Post->find('all'));
-            
             $this->loadModel('Question');
             $this->set('questions', $this->Question->find('all', array(
                 'limit' => 10,

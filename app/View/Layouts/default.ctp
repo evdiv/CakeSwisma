@@ -62,6 +62,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                     <?php echo $this->Html->link('All questions', array('controller' => 'questions', 'action' => 'index')); ?>                        
                          |
                     <?php echo $this->Html->link('Add answer', array('controller' => 'answers', 'action' => 'add')); ?>               
+                    <?php echo $this->Html->link('All answers', array('controller' => 'answers', 'action' => 'index')); ?>       
                 </div>
 		<div id="content" style="width:1250px; margin:0 auto;">
                     
