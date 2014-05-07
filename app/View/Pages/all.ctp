@@ -1,6 +1,6 @@
 <h1>Pages</h1>
 
-<table>
+<table class='table table-hover'>
     <tr>
         <th>Id</th>
         <th>Title</th>

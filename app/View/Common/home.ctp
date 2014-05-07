@@ -4,7 +4,10 @@
 
     <div id="main" style="float:left; width:880px; padding:10px;">
         <p><?php echo $this->fetch('page_content'); ?></p>
-        <p><?php echo $this->fetch('questions'); ?></p>
+        
+            <p><?php echo $this->fetch('clinics'); ?></p>
+       
+        
         <p><?php echo $this->fetch('content'); ?></p>     
     </div>
     

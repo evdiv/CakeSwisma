@@ -1,7 +1,12 @@
 <?php
 /**
- * CakePHP Controller PostsController
- * @author Eugene
+ * Posts Controller
+ *
+ * PHP version 5.5
+ *
+ * @category Controller
+ * @version  1.0
+ * @author   Eugene <vakuka@gmail.com>
  */
 class PostsController extends AppController {
 	public function index() {

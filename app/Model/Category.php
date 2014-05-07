@@ -13,10 +13,6 @@ class Category extends AppModel {
         'Post' => array(
             'className' => 'Post',
             'foreignKey' => 'user_id'
-        ), 
-        'Question' => array(
-            'className' => 'Question',
-            'foreignKey' => 'question_id'
-        )     
+        )
     );
 }

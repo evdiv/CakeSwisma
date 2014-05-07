@@ -14,6 +14,5 @@
 <?php $this->start('questions');
 
     echo $this->element('questions/recent_questions', $questions);
-    echo $this->element('questions/add_question');
     
     $this->end(); ?>

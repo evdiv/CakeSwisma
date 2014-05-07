@@ -16,4 +16,4 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<?php echo $this->fetch('content'); ?>
+<?php echo $content_for_layout; ?>

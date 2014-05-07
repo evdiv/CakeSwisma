@@ -1,6 +1,6 @@
 <?php
 /**
- * Question Model
+ * Clinic Model
  *
  * PHP version 5.5
  *
@@ -8,26 +8,22 @@
  * @version  1.0
  * @author   Eugene <vakuka@gmail.com>
  */
-class Question extends AppModel {
+class Clinic extends AppModel {
 	public $belongsTo = array(
-            'Category' => array(
-                'className' => 'Category',
-                'foreignKey' => 'category_id'
-            ),
             'User' => array(
                 'className' => 'User',
                 'foreignKey' => 'user_id'
             )
         );
         public $hasMany = array(
-            'Answer' => array(
-                'className' => 'Answer',
-                'foreignKey' => 'question_id'
+            'Review' => array(
+                'className' => 'Review',
+                'foreignKey' => 'clinic_id'
              
             ),
             'Comment' => array(
                 'className' => 'Comment',
-                'foreignKey' => 'question_id'
+                'foreignKey' => 'clinic_id'
             )
         );
         

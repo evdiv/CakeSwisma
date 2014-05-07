@@ -1,31 +1,45 @@
 <?php
 /**
- * CakePHP Controller PagesController
- * @author Eugene
+ * Pages Controller
+ *
+ * PHP version 5.5
+ *
+ * @category Controller
+ * @version  1.0
+ * @author   Eugene <vakuka@gmail.com>
  */
 class PagesController extends AppController {
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Auth->allow('index');
+        }
+
+
         public function index() {
             $this->set('page', $this->Page->find('first'));
             
-            $this->loadModel('Question');
-            $this->set('questions', $this->Question->find('all', array(
+            $this->loadModel('Clinic');
+            $this->set('clinics', $this->Clinic->find('all', array(
                 'limit' => 10,
-                'order' => 'Question.created DESC'
+                'order' => 'Clinic.created DESC'
             )));
-            $this->set('categories', $this->Question->Category->find('list'));
+            $this->set('sections', $this->Clinic->Section->find('list'));
             
-            //Just for test create question form handler
+            //Just for test create clinic form handler
             if($this->request->is('post')) {
-                $this->Question->create();
-                if($this->Question->save($this->request->data)) {
-                    $this->Session->setFlash(__('The Question has been added'));
+                
+                $this->Clinic->create();
+                $this->Clinic->User->create();
+                
+                if($this->Clinic->save($this->request->data) && $this->Clinic->User->save($this->request->data)) {
+                    $this->Session->setFlash(__('The Clinic has been added'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('Unable to add new question'));
+                $this->Session->setFlash(__('Unable to add new clinic'));
             }
         }
         
-        public function all() {
+        public function admin_index() {
             $this->set('pages', $this->Page->find('all'));
         }
         
@@ -38,5 +52,5 @@ class PagesController extends AppController {
                 }
                 $this->Session->setFlash(__('Unable to add new page'));
             }
-        }     
+        }
 }

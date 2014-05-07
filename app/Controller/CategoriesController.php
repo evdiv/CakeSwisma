@@ -1,7 +1,12 @@
 <?php
 /**
- * CakePHP Controller CategoriesController
- * @author Eugene
+ * Categories Controller
+ *
+ * PHP version 5.5
+ *
+ * @category Controller
+ * @version  1.0
+ * @author   Eugene <vakuka@gmail.com>
  */
 class CategoriesController extends AppController {
     public function index() {
@@ -18,6 +23,5 @@ class CategoriesController extends AppController {
             $this->Session->setFlash(__('Unable to add new Category'));
             
         }
-    }
-	
+    }	
 }

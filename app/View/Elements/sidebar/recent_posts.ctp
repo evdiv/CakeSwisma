@@ -1,6 +1,6 @@
     <b>Recent posts</b>
   
-  <table>
+  <table class="table">
     <tr>
         <th>Title</th>
         <th>User Name</th>       

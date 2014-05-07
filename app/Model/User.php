@@ -9,7 +9,6 @@
  * @author   Eugene <vakuka@gmail.com>
  */
 class User extends AppModel {
-    public $belongsTo = 'Role';
     public $hasMany = array(
         'Page' => array(
             'className' => 'Page',
@@ -19,12 +18,12 @@ class User extends AppModel {
             'className' => 'Post',
             'foreignKey' => 'user_id'
         ), 
-         'Question' => array(
-            'className' => 'Question',
+         'Clinic' => array(
+            'className' => 'Clinic',
             'foreignKey' => 'user_id'
         ),
-        'Answer' => array(
-            'className' => 'Answer',
+        'Review' => array(
+            'className' => 'Review',
             'foreignKey' => 'user_id'
         ),
         'Comment' => array(
@@ -32,6 +31,16 @@ class User extends AppModel {
             'foreignKey' => 'user_id'
         )
     );
+    
+    public function beforeSave($options = array()) {
+        if(isset($this->data['User']['password'])) {
+            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            return true; 
+        } else {
+            return false;
+        }
+    } 
+    
 }
 
 ?>

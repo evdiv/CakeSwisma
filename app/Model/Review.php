@@ -1,6 +1,6 @@
 <?php
 /**
- * Answer Model
+ * Review Model
  *
  * PHP version 5.5
  *
@@ -8,21 +8,21 @@
  * @version  1.0
  * @author   Eugene <vakuka@gmail.com>
  */
-class Answer extends AppModel {
+class Review extends AppModel {
 	public $belongsTo = array(
             'User' => array(
                 'className' => 'User',
                 'foreignKey' => 'user_id'
             ),
-            'Question' => array(
-                'className' => 'Question',
-                'foreignKey' => 'question_id'
+            'Clinic' => array(
+                'className' => 'Clinic',
+                'foreignKey' => 'clinic_id'
             )
         );
         public $hasMany = array(
             'Comment' => array(
                 'className' => 'Comment',
-                'foreignKey' => 'answer_id'
+                'foreignKey' => 'review_id'
             )
         );
 }

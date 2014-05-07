@@ -10,13 +10,13 @@
  */
 class Comment extends AppModel {
 	public $belongsTo = array(
-            'Answer' => array(
-               'className' => 'Answer',
-                'foreignKey' => 'answer_id'
+            'Review' => array(
+               'className' => 'Review',
+                'foreignKey' => 'review_id'
             ),
-            'Question' => array(
-                'className' => 'Question',
-                'foreignKey' => 'question_id'
+            'Clinic' => array(
+                'className' => 'Clinic',
+                'foreignKey' => 'clinic_id'
             )
         );
 }

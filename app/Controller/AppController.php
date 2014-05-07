@@ -2,40 +2,38 @@
 
 App::uses('Controller', 'Controller');
 
-/**
- * Application Controller
- *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @package		app.Controller
- * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
- */
 class AppController extends Controller {
-/**
-* Components
-*
-* @var array
-* @access public
-*/
-   public $components = array(
-           'Session'
-   );
 
-/**
-* Helpers
-*
-* @var array
-* @access public
-*/
-   public $helpers = array(
-           'Html',
-           'Form',
-           'Session'
-   );
-   
+    public $components = array('Session', 'Auth');
+    
+    public $helpers = array('Html', 'Form', 'Session', 'Js', 'Paginator');
+
+    public function beforeFilter() {
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
+        $this->Auth->loginRedirect = array('controller' => 'clinics', 'action' => 'index', 'admin' => true);
+        $this->Auth->logoutRedirect = array('controller' => 'clnics', 'action' => 'index', 'admin' => false);
+        $this->Auth->authorize = array('Controller');
+        
+        if ((isset($this->params['prefix']) && ($this->params['prefix'] == 'admin'))) {
+        $this->layout = 'admin';
+        }
+        
+        $this->set('logged_in', $this->Auth->loggedIn());
+    }
+    
+    //Admin has access to any page
+    public function isAuthorized($user) {
+       if($user['role'] === 'admin') {
+            return true;
+       }
+    }
+
+    
+    
+ 
    public function beforeRender() {
-            $this->loadModel('Post');
-            $this->set('posts', $this->Post->find('all'));
+       
+        $this->loadModel('Post');
+        $this->set('posts', $this->Post->find('all'));
    }
 }
