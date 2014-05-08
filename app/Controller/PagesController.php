@@ -56,6 +56,44 @@ class PagesController extends AppController {
             }
         }
         
+        public function admin_disable($id = null) {
+             if ($this->request->is('get')) {
+                throw new MethodNotAllowedException();
+            }
+             if (!$id) {
+                throw new NotFoundException(__('Invalid id'));
+            }
+            $page = $this->Page->findById($id);
+            if (!$page) {
+                throw new NotFoundException(__('Unable find page with id: %s', h($id)));
+            }     
+            if ($this->request->is('post')) {
+                $page['Page']['published'] = 0;
+                $this->Page->save($page);
+                $this->Session->setFlash('The page has been unpublished');
+                return $this->redirect(array('action' => 'index'));
+            }
+        }
+
+        public function admin_enable($id = null) {
+             if ($this->request->is('get')) {
+                throw new MethodNotAllowedException();
+            }
+             if (!$id) {
+                throw new NotFoundException(__('Invalid id'));
+            }
+            $page = $this->Page->findById($id);
+            if (!$page) {
+                throw new NotFoundException(__('Unable find page with id: %s', h($id)));
+            }     
+            if ($this->request->is('post')) {                
+                $page['Page']['published'] = 1;
+                $this->Page->save($page);
+                $this->Session->setFlash('The page has been published');
+                return $this->redirect(array('action' => 'index'));
+            }
+        }        
+        
         public function admin_edit($id = null) { 
             if (!$id) {
                 throw new NotFoundException(__('Invalid id'));

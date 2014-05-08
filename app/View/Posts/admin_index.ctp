@@ -22,9 +22,26 @@
         <td><?php echo $post['Post']['created']; ?></td>           
         <td><?php echo $post['Post']['views']; ?></td>  
         
-        <td><?php echo $this->Form->postLink('delete', 
+        <td>
+             <?php if($post['Post']['published'] == 1): ?>
+            
+            <?php echo $this->Form->postLink('disable', 
+                array('controller' => 'posts', 'action' => 'admin_disable', $post['Post']['id']),
+                array('class' => 'btn btn-warning btn-xs')); ?>
+            
+            <?php else: ?>
+            
+            <?php echo $this->Form->postLink('enable', 
+                array('controller' => 'posts', 'action' => 'admin_enable', $post['Post']['id']),
+                array('class' => 'btn btn-success btn-xs')); ?>
+            
+            <?php endif; ?>
+            
+            <?php echo $this->Form->postLink('delete', 
             array('controller' => 'posts', 'action' => 'delete', $post['Post']['id']),
-            array('class' => 'btn btn-danger btn-xs')); ?></td> 
+            array('class' => 'btn btn-danger btn-xs')); ?>
+        
+        </td> 
          
     </tr>
     <?php endforeach; ?>

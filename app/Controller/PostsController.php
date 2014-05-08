@@ -28,7 +28,45 @@ class PostsController extends AppController {
             $this->set('categories', $this->Post->Category->find('list'));
         }
         
-                public function admin_edit($id = null) { 
+        public function admin_disable($id = null) {
+             if ($this->request->is('get')) {
+                throw new MethodNotAllowedException();
+            }
+             if (!$id) {
+                throw new NotFoundException(__('Invalid id'));
+            }
+            $post = $this->Post->findById($id);
+            if (!$post) {
+                throw new NotFoundException(__('Unable find post with id: %s', h($id)));
+            }     
+            if ($this->request->is('post')) {               
+                $post['Post']['published'] = 0;
+                $this->Post->save($post);
+                $this->Session->setFlash('The post has been unpublished');
+                return $this->redirect(array('action' => 'index'));
+            }
+        }
+
+        public function admin_enable($id = null) {
+             if ($this->request->is('get')) {
+                throw new MethodNotAllowedException();
+            }
+             if (!$id) {
+                throw new NotFoundException(__('Invalid id'));
+            }
+            $post = $this->Post->findById($id);
+            if (!$post) {
+                throw new NotFoundException(__('Unable find post with id: %s', h($id)));
+            }     
+            if ($this->request->is('post')) {                
+                $post['Post']['published'] = 1;
+                $this->Post->save($post);
+                $this->Session->setFlash('The post has been published');
+                return $this->redirect(array('action' => 'index'));
+            }
+        }        
+        
+       public function admin_edit($id = null) { 
             if (!$id) {
                 throw new NotFoundException(__('Invalid id'));
             }
