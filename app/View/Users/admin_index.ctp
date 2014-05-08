@@ -32,9 +32,7 @@
             
            <?php echo $this->Form->postLink('delete', 
                 array('controller' => 'users', 'action' => 'delete', $user_id),
-                array('class' => 'btn btn-danger btn-xs')); ?></td>        
-        
-        
+                array('class' => 'btn btn-danger btn-xs')); ?></td>         
     </tr>
     <?php endforeach; ?>
     

@@ -7,6 +7,7 @@
         <th>User Name</th>    
         <th>Created</th> 
         <th>Views</th> 
+        <th>Actions</th>         
     </tr>
 
     
@@ -15,15 +16,19 @@
         <td><?php echo $page['Page']['id']; ?></td>
         
         <td><?php echo $this->Html->link($page['Page']['title'], 
-                array('controller' => 'pages', 'action' => 'view', 
+                array('controller' => 'pages', 'action' => 'edit', 
                     $page['Page']['id'])); ?></td>     
         
         <td><?php echo $page['User']['username']; ?></td>           
         <td><?php echo $page['Page']['created']; ?></td> 
-        <td> - </td>    
+        <td> - </td>  
+        <td><?php echo $this->Form->postLink('delete', 
+                array('controller' => 'pages', 'action' => 'delete', $page['Page']['id']),
+                array('class' => 'btn btn-danger btn-xs')); ?></td>  
        
     </tr>
     <?php endforeach; ?>
     
     <?php unset($pages); ?>
+    
 </table>

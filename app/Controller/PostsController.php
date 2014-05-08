@@ -9,24 +9,67 @@
  * @author   Eugene <vakuka@gmail.com>
  */
 class PostsController extends AppController {
-	public function index() {
+	public function admin_index() {
             $this->set('posts', $this->Post->find('all', array(
              'limit' => 10,
              'order' => 'Post.created DESC'
             )));
         }
         
-        public function add() {
+        public function admin_add() {
             if($this->request->is('post')) {
                 $this->Post->create();
                 if($this->Post->save($this->request->data)) {
                     $this->Session->setFlash(__('The Post has been added'));
-                    return $this->redirect(array('action' => 'all'));
+                    return $this->redirect(array('action' => 'index'));
                 }
                 $this->Session->setFlash(__('Unable to add new post'));
             }
             $this->set('categories', $this->Post->Category->find('list'));
         }
+        
+                public function admin_edit($id = null) { 
+            if (!$id) {
+                throw new NotFoundException(__('Invalid id'));
+            }
+            
+            $post = $this->Post->findById($id);
+            if (!$post) {
+                throw new NotFoundException(__('Unable find post with id: %s', h($id)));
+            }
+            
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Post->id = $id;
+                if ($this->Post->save($this->request->data)) {
+                    $this->Session->setFlash(__('Post has been updated.'));
+                    return $this->redirect(array('action' => 'index'));
+                }
+                $this->Session->setFlash(__('Unable to update post.'));
+            } else {
+                
+               $this->request->data = $post;
+            }
+        }
+        
+      public function admin_delete($id) {
+         if ($this->request->is('get')) {
+             throw new MethodNotAllowedException();
+         }
+         if(!$id) {
+             throw new NotFoundException('Invalid Id');
+         }
+         if(!$this->Post->findById($id)) {
+             throw new NotFoundException('Post with id: %s does\'t exist in the Db', h($id));
+         }
+             
+         if ($this->Post->delete($id)) {
+             $this->Session->setFlash(
+                 __('The post with id: %s has been deleted.', h($id))
+             );
+             return $this->redirect(array('action' => 'index'));
+         }
+     }
+        
         public function view($id = null) {
             if(!$id) {
                 throw new NotFoundException(__('Invalid post'));

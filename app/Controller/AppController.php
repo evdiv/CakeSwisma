@@ -28,9 +28,6 @@ class AppController extends Controller {
        }
     }
 
-    
-    
- 
    public function beforeRender() {
        
         $this->loadModel('Post');

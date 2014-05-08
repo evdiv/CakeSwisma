@@ -43,14 +43,58 @@ class PagesController extends AppController {
             $this->set('pages', $this->Page->find('all'));
         }
         
-        public function add() {
+        public function admin_add() {
             if($this->request->is('post')) {
-                $this->Page->create();
-                if($this->Page->save($this->request->data)) {
+                $this->Page->create();   
+                $page = $this->request->data;
+                $page['Page']['user_id'] = $this->Auth->user('id');
+                if($this->Page->save($page)) {
                     $this->Session->setFlash(__('The Page has been added'));
-                    return $this->redirect(array('action' => 'all'));
+                    return $this->redirect(array('action' => 'index'));
                 }
                 $this->Session->setFlash(__('Unable to add new page'));
             }
         }
+        
+        public function admin_edit($id = null) { 
+            if (!$id) {
+                throw new NotFoundException(__('Invalid id'));
+            }
+            
+            $page = $this->Page->findById($id);
+            if (!$page) {
+                throw new NotFoundException(__('Unable find page with id: %s', h($id)));
+            }
+            
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Page->id = $id;
+                if ($this->Page->save($this->request->data)) {
+                    $this->Session->setFlash(__('Page has been updated.'));
+                    return $this->redirect(array('action' => 'index'));
+                }
+                $this->Session->setFlash(__('Unable to update page.'));
+            } else {
+                
+               $this->request->data = $page;
+            }
+        }
+        
+      public function admin_delete($id) {
+         if ($this->request->is('get')) {
+             throw new MethodNotAllowedException();
+         }
+         if(!$id) {
+             throw new NotFoundException('Invalid Id');
+         }
+         if(!$this->Page->findById($id)) {
+             throw new NotFoundException('Page with id: %s does\'t exist in the Db', h($id));
+         }
+             
+         if ($this->Page->delete($id)) {
+             $this->Session->setFlash(
+                 __('The page with id: %s has been deleted.', h($id))
+             );
+             return $this->redirect(array('action' => 'index'));
+         }
+     } 
 }
