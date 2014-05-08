@@ -23,10 +23,12 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         <?php echo $this->Js->writeBuffer(); ?>
 </head>
 <body>
+    <?php // echo '<pre>', print_r($current_user), '</pre>'; ?>
 	<div id="container">
 		<div class="navbar navbar-default">
                     
                     <div class="navbar-header">
+       
                         <?php echo $this->Html->link('Swisma', array('controller' => 'pages', 'action' => 'index', 'admin' => false), array('class' => 'navbar-brand')); ?>
                     </div>
                     
@@ -65,11 +67,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                       </li>                                                     
                       
                       <li><?php echo $this->Html->link('Reviews', array('controller' => 'reviews', 'action' => 'index')); ?> </li>    
-
+                      <li><?php echo $this->Html->link('Comments', array('controller' => 'comments', 'action' => 'index')); ?> </li>    
                     </ul>     
-                    
+                                            <div class="navbar-header">
+                               
+                           </div>  
                     <ul class="nav navbar-nav navbar-right"> 
                          <?php if ($logged_in): ?>  
+    
                             <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li> 
                         <?php else: ?>
                             <li><?php echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'register')); ?></li> 

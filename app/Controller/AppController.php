@@ -4,9 +4,28 @@ App::uses('Controller', 'Controller');
 
 class AppController extends Controller {
 
-    public $components = array('Session', 'Auth');
+    public $components = array(
+        'Paginator',
+        'Session', 
+        'Auth' => array(
+            'flash' => array(
+                'element' => 'alert',
+                'key' => 'auth',
+                'params' => array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-error'
+                )
+            )
+        )
+    );
     
-    public $helpers = array('Html', 'Form', 'Session', 'Js', 'Paginator');
+    public $helpers = array( 
+        'Js', 
+        'Session',
+        'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
+        'Form' => array('className' => 'BoostCake.BoostCakeForm'),
+        'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),        
+        );
 
     public function beforeFilter() {
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
@@ -19,6 +38,8 @@ class AppController extends Controller {
         }
         
         $this->set('logged_in', $this->Auth->loggedIn());
+        $this->set('current_user', $this->Auth->user());   
+        
     }
     
     //Admin has access to any page
