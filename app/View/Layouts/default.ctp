@@ -26,7 +26,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<div id="container">
 		<div class="navbar navbar-inverse">
                     <ul class="nav navbar-nav">
-                        <li><?php echo $this->Html->link('Home Page', array('controller' => 'pages', 'action' => 'index')); ?></li>
+                        <li><?php echo $this->Html->link('Home Page', array('controller' => 'clinics', 'action' => 'index')); ?></li>
                         <li><?php echo $this->Html->link('All Pages', array('controller' => 'pages', 'action' => 'all')); ?></li>
                         <li><?php echo $this->Html->link('Add user', array('controller' => 'users', 'action' => 'add')); ?></li>
                         <li><?php echo $this->Html->link('All users', array('controller' => 'users', 'action' => 'index')); ?></li>

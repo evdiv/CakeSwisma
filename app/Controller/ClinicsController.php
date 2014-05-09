@@ -17,16 +17,7 @@ class ClinicsController extends AppController {
             $this->set('clinics', $this->Clinic->find('all', array(
              'limit' => 10,
              'order' => 'Clinic.created DESC'
-            )));
-            if($this->request->is('post')) {
-                $this->Clinic->create();
-                if($this->Clinic->save($this->request->data)) {
-                    $this->Session->setFlash(__('The Clinic has been added'));
-                    return $this->redirect(array('action' => 'index'));
-                }
-                $this->Session->setFlash(__('Unable to add new clinic'));
-            }
-            $this->set('sections', $this->Clinic->Sections->find('list'));
+            )));         
         }
         
         public function view($id = null) {
@@ -39,14 +30,28 @@ class ClinicsController extends AppController {
             }
             if($this->request->is('post')) {
                 if(isset($this->request->data['Review'])) {
-                    $this->Clinic->Review->create();
+                    //If the user not registered he see form with registration fields
+                    //after it is submitted we save data in the two models: User and Review
+                    //after that logged user manualy
+                    if(!$this->Auth->loggedIn()) {
+                        if($this->Clinic->Review->saveAssociated($this->request->data)) {
+                            $this->Auth->login($this->request->data['User']);
+                            $this->Session->setFlash(__('Your Review has been added'));
+                            return $this->redirect(array('action' => 'view', $id));  
+                        }                        
+                    } else {
+                        //If user logged in simply create Review
+                        $this->Clinic->Review->create();
                         if($this->Clinic->Review->save($this->request->data)) {
                             $this->Session->setFlash(__('Your Review has been added'));
                             return $this->redirect(array('action' => 'view', $id));  
-                        }
+                        }                         
+                    }
+                        //if the Review has not be saved in the DB show this
                         $this->Session->setFlash(__('Unable to add Review'));
                         
                 }elseif (isset($this->request->data['Comment'])) {
+
                     $this->Clinic->Review->Comment->create();
                         if($this->Clinic->Review->Comment->save($this->request->data)) {
                             $this->Session->setFlash(__('Your Comment has been added'));

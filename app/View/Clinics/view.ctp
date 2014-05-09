@@ -1,3 +1,4 @@
+
 <?php $this->extend('/Common/home'); ?>
 
 <?php $this->assign('page_title', $clinic['Clinic']['title']); ?>
@@ -15,7 +16,8 @@
 <p><?php echo $clinic['Clinic']['content']; ?></p> 
 
 <?php foreach ($clinic['Review'] as $review): ?>
-<p style="margin-left: 100px; color: #666;">
+
+<p color: #666;">
     <i><b>Review: </b>
     <?php echo $review['content']; ?></i>      
     <?php foreach ($clinic['Comment'] as $comment): ?>
@@ -24,7 +26,7 @@
         <?php endif;?>
     <?php endforeach; ?>
     
-    <div style="margin-left: 300px; color: #666;">
+    <div style="margin-left: 20px; color: #666;">
     <?php echo $this->element('comments/add_comment', array(
         'review_id' => $review['id'],
         'clinic_id' => $review['clinic_id']
@@ -36,4 +38,9 @@
 
 <h1>Add your Review</h1>
 
-<?php echo $this->element('reviews/add_review'); ?>
+<?php if($logged_in): ?>
+
+     <?php echo $this->element('reviews/add_review_register'); ?>
+<?php else: ?>
+     <?php echo $this->element('reviews/add_review_unregister'); ?>
+<?php endif; ?>
