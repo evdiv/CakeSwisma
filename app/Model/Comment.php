@@ -17,6 +17,11 @@ class Comment extends AppModel {
             'Clinic' => array(
                 'className' => 'Clinic',
                 'foreignKey' => 'clinic_id'
+            ),
+            'User' => array(
+                'className' => 'User',
+                'foreignKey' => 'user_id'
             )
         );
+      
 }

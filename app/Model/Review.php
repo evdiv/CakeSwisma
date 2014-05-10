@@ -9,6 +9,7 @@
  * @author   Eugene <vakuka@gmail.com>
  */
 class Review extends AppModel {
+    
 	public $belongsTo = array(
             'User' => array(
                 'className' => 'User',
@@ -25,4 +26,5 @@ class Review extends AppModel {
                 'foreignKey' => 'review_id'
             )
         );
+       
 }

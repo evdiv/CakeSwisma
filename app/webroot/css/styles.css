@@ -1,0 +1,17 @@
+/* 
+    Document   : styles
+    Created on : 8-May-2014, 11:44:19 PM
+    Author     : Eugene
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.comment_block {
+    display:none;
+}
+.hide_comment {
+    display:none;
+}

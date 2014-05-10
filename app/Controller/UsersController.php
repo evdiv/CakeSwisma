@@ -12,7 +12,7 @@ class UsersController extends AppController {
      
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'register');
+        $this->Auth->allow('index', 'register', 'login', 'logout');
     }
     
         public function index() {
@@ -62,7 +62,7 @@ class UsersController extends AppController {
 
         public function logout() {
             $this->Auth->logout();
-             return $this->redirect(array('controller' => 'users', 'action' => 'login'));
+             return $this->redirect(array('controller' => 'clinics', 'action' => 'index'));
         }
         
         public function admin_index() {

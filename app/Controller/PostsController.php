@@ -9,6 +9,7 @@
  * @author   Eugene <vakuka@gmail.com>
  */
 class PostsController extends AppController {
+    
 	public function admin_index() {
             $this->set('posts', $this->Post->find('all', array(
              'limit' => 10,

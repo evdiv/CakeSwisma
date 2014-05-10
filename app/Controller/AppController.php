@@ -16,7 +16,7 @@ class AppController extends Controller {
                     'class' => 'alert-error'
                 )
             )
-        )
+        )   
     );
     
     public $helpers = array( 

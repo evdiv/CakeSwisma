@@ -9,6 +9,7 @@
  * @author   Eugene <vakuka@gmail.com>
  */
 class Clinic extends AppModel {
+    
 	public $belongsTo = array(
             'User' => array(
                 'className' => 'User',
@@ -26,5 +27,5 @@ class Clinic extends AppModel {
                 'foreignKey' => 'clinic_id'
             )
         );
-        
+       
 }

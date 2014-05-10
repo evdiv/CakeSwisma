@@ -9,6 +9,7 @@
  * @author   Eugene <vakuka@gmail.com>
  */
 class ReviewsController extends AppController {
+    
 	public function index() {
             $this->set('reviews', $this->Review->find('all', array(
              'limit' => 10,
