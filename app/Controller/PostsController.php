@@ -117,6 +117,7 @@ class PostsController extends AppController {
             if(!$post) {
                 throw new NotFoundException(__('Invalid post'));
             }
-            $this->set('post', $post);  
+            $this->set('post', $post); 
+            $this->Post->updateViews($post);
         }
 }

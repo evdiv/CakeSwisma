@@ -8,6 +8,7 @@
         <th>Description</th>        
         <th>Created</th> 
         <th>Views</th> 
+        <th>Rank</th>         
         <th>Reviews</th>         
         <th>Actions</th>         
     </tr>
@@ -22,14 +23,20 @@
               
         <td><?php echo $clinic['Clinic']['created']; ?></td> 
         
-        <td> - </td>
+        <td><?php echo $clinic['Clinic']['views']; ?></td> 
+        
+        <td><?php echo $clinic['Clinic']['rank']; ?></td>         
         
         <td><?php echo $this->Html->link(count($clinic['Review']),
                     array('controller' => 'reviews', 'action' => 'index', 
                     $clinic['Clinic']['id'])); ?>
         </td> 
         
-        <td>
+        <td class="col-md-2">
+             <?php echo $this->Html->link('edit', 
+                array('controller' => 'clinics', 'action' => 'admin_edit', $clinic['Clinic']['id']),
+                array('class' => 'btn btn-default btn-xs')); ?>
+            
             <?php if($clinic['Clinic']['published'] == 1): ?>
             
             <?php echo $this->Form->postLink('disable', 

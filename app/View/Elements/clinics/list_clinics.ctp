@@ -4,7 +4,7 @@
         <th>Title</th>  
         <th>Created</th> 
         <th>Reviews</th>
-        <th>Rating</th>         
+        <th>Rank</th>         
     </tr>
 
     
@@ -18,22 +18,19 @@
                 
         <td><?php echo $clinic['Clinic']['created']; ?></td> 
         <td><?php echo count($clinic['Review']); ?></td> 
-        
         <td>
-            <?php 
-            /////////////////TODO: move this logic from the view
-            $vote = 0;
-            foreach ($clinic['Review'] as $review) {
-            $vote += $review['vote'];
-            }
-            ?>
-            <?php 
-            ///////////////TODO: use stars for represents rating
-            echo $vote / count($clinic['Review']); 
-            ?>
+            <?php if($clinic['Clinic']['rank'] > 6): ?>
+             <h4 class="text-success">
+            <?php elseif ($clinic['Clinic']['rank'] < 4): ?>
+             <h4 class="text-danger">
+            <?php else: ?>
+             <h4 class="text-warning">
+            <?php endif; ?>
+            
+            <?php echo $clinic['Clinic']['rank']; ?>
+             </h4>
+        </td> 
         
-        
-        </td>          
         <td> </td>    
         
     </tr>

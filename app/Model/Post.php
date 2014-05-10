@@ -19,4 +19,17 @@ class Post extends AppModel {
             'foreignKey' => 'category_id'
         )
     );
+    
+    public function updateViews($post) {
+            //Get post Id from the Array $post
+            $postId = Set::extract('/Post/id', $post);
+
+            //Update post view in the DB
+            $this->updateAll(
+                    array(
+                            'Post.views' => 'Post.views + 1',
+                    ),
+                    array('Post.id' => $postId)
+            );
+    } 
 }

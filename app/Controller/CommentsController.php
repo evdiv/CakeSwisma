@@ -14,11 +14,14 @@ class CommentsController extends AppController {
            if(!$id) {
             $this->Comment->recursive = 1;
             $this->set('comments', $this->paginate());              
-           } else {
-             $this->set('comments', $this->Comment->find('all', array(
+           } else {    
+             $this->Paginator->settings =  array(
              'conditions' => array('Comment.review_id' => $id),
              'order' => 'Comment.created DESC',
-           )));
+             );
+             $comments = $this->Paginator->paginate('Comment');
+             $this->set(compact('comments'));
+             
            }
         }
         public function admin_disable($id = null) {

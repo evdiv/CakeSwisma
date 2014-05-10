@@ -44,10 +44,12 @@ class ReviewsController extends AppController {
                 $this->Review->recursive = 1;
                 $this->set('reviews', $this->paginate());                  
            } else {
-                $this->set('reviews', $this->Review->find('all', array(
-                'conditions' => array('Review.clinic_id' => $id),
-                'order' => 'Review.created DESC',
-           )));
+             $this->Paginator->settings =  array(
+             'conditions' => array('Review.clinic_id' => $id),
+             'order' => 'Review.created DESC',
+             );
+             $reviews = $this->Paginator->paginate('Review');
+             $this->set(compact('reviews'));
            }
         }
         

@@ -8,7 +8,6 @@
         <th>Content</th>        
         <th>Created</th> 
         <th>Author</th>        
-        <th>Views</th> 
         <th>Comments</th>         
         <th>Actions</th>         
     </tr>
@@ -25,8 +24,6 @@
         
         <td><?php echo $review['User']['username']; ?></td>         
         
-        <td> - </td>
-        
         <td>
             <?php echo $this->Html->link(count($review['Comment']),
                     array('controller' => 'comments', 'action' => 'index', 
@@ -35,7 +32,7 @@
         
            
         
-        <td>
+        <td class="col-md-2">
             <?php if($review['Review']['published'] == 1): ?>
             
             <?php echo $this->Form->postLink('disable', 

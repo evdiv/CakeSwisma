@@ -27,5 +27,42 @@ class Clinic extends AppModel {
                 'foreignKey' => 'clinic_id'
             )
         );
+        
+	public function updateViews($clnic) {
+                //Get clinic Id from the Array $clnic
+		$clinicId = Set::extract('/Clinic/id', $clnic);
+
+                //Update clinic view in the DB
+		$this->updateAll(
+			array(
+				'Clinic.views' => 'Clinic.views + 1',
+			),
+			array('Clinic.id' => $clinicId)
+		);
+	}        
        
+        public function updateRank($clinicId) {
+        
+        $clinicReviews = $this->Review->find('all', array(
+            'conditions' => array(
+                'Review.clinic_id' => $clinicId
+            )
+        ));
+        
+        $reviewsNumber = count($clinicReviews);
+        
+        $sumReviewsRank = 0;
+        foreach ($clinicReviews as $clinicReview) {
+            $sumReviewsRank += $clinicReview['Review']['vote'];     
+        }
+        
+        $clinicRank = round($sumReviewsRank / $reviewsNumber, 1);      
+
+        $this->updateAll(
+                array(
+                        'Clinic.rank' => $clinicRank,
+                ),
+                array('Clinic.id' => $clinicId)
+        );
+	} 
 }

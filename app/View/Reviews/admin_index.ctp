@@ -3,11 +3,12 @@
 
 <table class="table table-striped table-hover ">
     <tr>
-	<th><?php echo $this->Paginator->sort('id'); ?></th>    
+	<th><?php echo $this->Paginator->sort('id'); ?></th> 
         <th>Clinic</th>
         <th>Review</th>  
-        <th>Comments</th>         
-	<th><?php echo $this->Paginator->sort('created'); ?></th>          
+	<th>Comments</th>        
+	<th><?php echo $this->Paginator->sort('created'); ?></th>  
+	<th><?php echo $this->Paginator->sort('vote'); ?></th>          
         <th>Actions</th>          
     </tr>
 
@@ -26,7 +27,8 @@
                     $review['Review']['id'])); ?>
         </td>
         
-        <td><?php echo $review['Review']['created']; ?></td>         
+        <td><?php echo $review['Review']['created']; ?></td>    
+        <td><?php echo $review['Review']['vote']; ?></td>         
         
         <td class="col-md-2">
             <?php if($review['Review']['published'] == 1): ?>

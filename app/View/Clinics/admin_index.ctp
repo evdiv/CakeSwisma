@@ -7,7 +7,9 @@
 	<th><?php echo $this->Paginator->sort('title'); ?></th>
 	<th><?php echo $this->Paginator->sort('created'); ?></th>
 	<th><?php echo $this->Paginator->sort('views'); ?></th>  
-	<th><?php echo $this->Paginator->sort('reviews'); ?></th>       
+	<th><?php echo $this->Paginator->sort('rank'); ?></th>            
+	<th><?php echo $this->Paginator->sort('reviews'); ?></th> 
+       
         <th>Actions</th>         
     </tr>
 
@@ -23,6 +25,8 @@
         <td><?php echo $clinic['Clinic']['created']; ?></td> 
         
         <td><?php echo $clinic['Clinic']['views']; ?></td> 
+        
+        <td><?php echo $clinic['Clinic']['rank']; ?></td> 
         
         <td><?php echo $this->Html->link(count($clinic['Review']),
                     array('controller' => 'reviews', 'action' => 'index', 

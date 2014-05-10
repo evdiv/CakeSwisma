@@ -31,19 +31,27 @@ class ClinicsController extends AppController {
         }
         if($this->request->is('post')) {
             if(isset($this->request->data['Review'])) {
-                //If the user not registered he see form with registration fields
-                //after it is submitted we save data in the two models: User and Review
-                //after that logged user manualy
+                //If the user not registered the form with registration fields is shown
+                //after it is submitted data is saved in the two models: User and Review
+                //after that user logged in automaticaly
                 if(!$this->Auth->loggedIn()) {
                     if($this->Clinic->Review->saveAssociated($this->request->data)) {
+                        
+                        $clinicId = $this->request->data['Review']['clinic_id'];
+                        $this->Clinic->updateRank($clinicId); 
+                        
                         $this->Auth->login($this->request->data['User']);
                         $this->Session->setFlash(__('Your Review has been added'));
                         return $this->redirect(array('action' => 'view', $id));  
                     }                        
                 } else {
-                    //If user logged in simply create Review
+                    //If user loggedin the Review model created
                     $this->Clinic->Review->create();
                     if($this->Clinic->Review->save($this->request->data)) {
+ 
+                        $clinicId = $this->request->data['Review']['clinic_id'];
+                        $this->Clinic->updateRank($clinicId); 
+                        
                         $this->Session->setFlash(__('Your Review has been added'));
                         return $this->redirect(array('action' => 'view', $id));  
                     }                         
@@ -73,7 +81,8 @@ class ClinicsController extends AppController {
                     $this->Session->setFlash(__('Unable to add Comment'));
              }
         }         
-        $this->set('clinic', $clinic);            
+        $this->set('clinic', $clinic); 
+        $this->Clinic->updateViews($clinic);
     }
 
     public function admin_index($id = null) {

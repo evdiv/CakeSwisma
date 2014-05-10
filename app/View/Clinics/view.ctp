@@ -1,6 +1,8 @@
 <?php $this->extend('/Common/home'); ?>
-<?php echo '<pre>', print_r($clinic), '</pre>'; ?>
 <?php echo $this->Html->script('show_comments', FALSE); ?>
+
+<?php //echo '<pre>',  print_r($data), '</pre>'; ?>
+<?php //echo '<pre>', print_r($clinic), '</pre>'; ?>
 
 <?php $this->assign('page_title', $clinic['Clinic']['title']); ?>
 
