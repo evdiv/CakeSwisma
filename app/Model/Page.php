@@ -10,7 +10,16 @@
  */
 class Page extends AppModel {
     public $belongsTo = 'User';
-            
+   
+    public $validate = array(
+        'title' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Title must not be empty.'
+        ),         
+        'content' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Content must not be empty.'
+         )       
+    );
 }
-
 ?>

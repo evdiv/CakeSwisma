@@ -16,7 +16,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 echo $this->Html->css('bootstrap.min');
                 echo $this->Html->css('styles');
                 
-                echo $this->Html->script('jquery-1.11.0.min');
+                echo $this->Html->script('jquery-1.11.0.min');                
+                echo $this->Html->script('bootstrap.min');                
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -39,14 +40,23 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         <div class="navbar-collapse collapse navbar-responsive-collapse"> 
         <ul class="nav navbar-nav">
 
-            <li><?php echo $this->Html->link('All categories', array('controller' => 'categories', 'action' => 'index')); ?></li>   
+           <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Post Categories<b class="caret"></b></a>
+               
+               <ul class="dropdown-menu">
+                    <?php foreach ($menu_categories as $category): ?>
+                    <li><?php echo $this->Html->link($category['Category']['title'], array('controller' => 'posts', 'action' => 'index', $category['Category']['id'])); ?></li>
+                    <?php endforeach; ?>           
+               </ul>
+           </li>   
 
             <li><?php echo $this->Html->link('All clinics', array('controller' => 'clinics', 'action' => 'index')); ?> </li>                                      
 
        </ul>    
        <ul class="nav navbar-nav navbar-right">      
              <?php if ($logged_in): ?>  
-           <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li> 
+                <li><?php echo $this->Html->link($current_user['full_name'], array('controller' => 'users', 'action' => 'view', $current_user['id'])); ?></li>            
+                <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li> 
                 <li><?php echo $this->Html->link('Admin', array('controller' => 'users', 'action' => 'index', 'admin' => true)); ?> </li> 
 
                     <?php else: ?>

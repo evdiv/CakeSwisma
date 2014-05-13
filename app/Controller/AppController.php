@@ -51,7 +51,9 @@ class AppController extends Controller {
 
    public function beforeRender() {
        
-        $this->loadModel('Post');
-        $this->set('posts', $this->Post->find('all'));
+    //Load Category Model for dropdown list in top menu
+    $this->loadModel('Category');
+    $this->set('menu_categories', $this->Category->find('all')); 
+
    }
 }

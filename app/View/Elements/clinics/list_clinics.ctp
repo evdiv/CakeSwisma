@@ -10,9 +10,9 @@
     <?php foreach ($clinics as $clinic): ?>
     <tr>
         <td><?php echo ($clinic['Clinic']['image']) ? $this->Html->image('/files/' . 
-                $clinic['Clinic']['image'], array('width' => 100, 'height' => 100, 'class' => 'img-circle')) 
+                $clinic['Clinic']['image'], array('width' => 100, 'height' => 100, 'class' => 'img-rounded')) 
                 : $this->Html->image('/files/' . 
-                'empty.png', array('width' => 100, 'height' => 100, 'class' => 'img-circle')) ; ?>
+                'empty.png', array('width' => 100, 'height' => 100, 'class' => 'img-rounded')) ; ?>
 </td>
         
         <td>

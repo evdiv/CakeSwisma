@@ -1,5 +1,5 @@
     <div id="header">
-        <h3><?php echo $this->fetch('page_title'); ?></h3>
+        <h1><?php echo $this->fetch('page_title'); ?></h1>
     </div>
 
     <div id="main" style="float:left; width:880px; padding:10px;">

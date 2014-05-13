@@ -27,7 +27,25 @@ class Clinic extends AppModel {
                 'foreignKey' => 'clinic_id'
             )
         );
-        
+       public $validate = array(
+        'title' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Title must not be empty.'
+        ),         
+        'content' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Content must not be empty.'
+         ),
+        'address' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Address must not be empty.'
+         ),
+        'phone' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Phone must not be empty.'
+         )          
+        );
+            
 	public function updateViews($clnic) {
                 //Get clinic Id from the Array $clnic
 		$clinicId = Set::extract('/Clinic/id', $clnic);

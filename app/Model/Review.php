@@ -26,5 +26,15 @@ class Review extends AppModel {
                 'foreignKey' => 'review_id'
             )
         );
-       
+        public $validate = array(
+        'vote' => array(
+             'rule' => array('custom', '/^[0-9]{1,4}$/i'),
+             'required'   => 'create',
+             'message' => 'Vote must contain only digits'
+        ),
+        'content' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Review must not be empty.'
+         )        
+    );       
 }

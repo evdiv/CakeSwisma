@@ -30,4 +30,39 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    
+    //Strip all tags from forms
+    public function beforeSave($options = array())
+{
+    if(!parent::beforeSave($options))
+    {
+        return false;
+    }
+
+     if(!empty($this->data[$this->alias]['title']))
+    {
+        $this->data[$this->alias]['title'] = strip_tags($this->data[$this->alias]['title']);
+    }
+    
+    if(!empty($this->data[$this->alias]['description']))
+    {
+        $this->data[$this->alias]['description'] = strip_tags($this->data[$this->alias]['description']);
+    }
+    
+    if(!empty($this->data[$this->alias]['content']))
+    {
+        $this->data[$this->alias]['content'] = strip_tags($this->data[$this->alias]['content']);
+    }    
+
+     if(!empty($this->data[$this->alias]['email']))
+    {
+        $this->data[$this->alias]['email'] = strip_tags($this->data[$this->alias]['email']);
+    }  
+    
+     if(!empty($this->data[$this->alias]['website']))
+    {
+        $this->data[$this->alias]['website'] = strip_tags($this->data[$this->alias]['website']);
+    }   
+    return true;
+}
 }

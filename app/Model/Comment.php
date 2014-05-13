@@ -23,5 +23,11 @@ class Comment extends AppModel {
                 'foreignKey' => 'user_id'
             )
         );
+       public $validate = array(
+        'content' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Comment must not be empty.'
+         )        
+    );
       
 }

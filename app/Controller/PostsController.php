@@ -10,6 +10,10 @@
  */
 class PostsController extends AppController {
     
+        public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('index', 'view');
+        }
 	public function admin_index() {
             $this->set('posts', $this->Post->find('all', array(
              'limit' => 10,
@@ -107,7 +111,21 @@ class PostsController extends AppController {
              );
              return $this->redirect(array('action' => 'index'));
          }
-     }
+        }
+     
+        public function index($id = null) {
+            if(!$id) {
+             throw new NotFoundException('Invalid Id');
+            }
+            
+            $this->set('posts', $this->Post->find('all', array(
+             'limit' => 10,
+             'order' => 'Post.created DESC',
+             'conditions' => array(
+                 'Post.category_id' => $id
+             )
+            )));
+        }
         
         public function view($id = null) {
             if(!$id) {
@@ -119,5 +137,10 @@ class PostsController extends AppController {
             }
             $this->set('post', $post); 
             $this->Post->updateViews($post);
+            
+            $this->set('posts', $this->Post->find('all', array(
+             'limit' => 5,
+             'order' => 'Post.created DESC'
+            )));
         }
 }

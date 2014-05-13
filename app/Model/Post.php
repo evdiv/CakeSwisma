@@ -19,6 +19,16 @@ class Post extends AppModel {
             'foreignKey' => 'category_id'
         )
     );
+    public $validate = array(
+        'title' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Title must not be empty.'
+        ),         
+        'content' => array(
+             'rule' => 'notEmpty',
+             'message' => 'Content must not be empty.'
+         )          
+    );
     
     public function updateViews($post) {
             //Get post Id from the Array $post

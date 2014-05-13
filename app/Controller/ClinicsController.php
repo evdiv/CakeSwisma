@@ -12,6 +12,13 @@ class ClinicsController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
+        
+        // Load Post Model for sidebar menu
+        $this->loadModel('Post');
+        $this->set('posts', $this->Post->find('all',array(
+          'limit' => 5,
+          'order' => 'Post.created DESC',
+        )));
     }
 
     public function index() {
