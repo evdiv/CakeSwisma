@@ -111,10 +111,23 @@ class ClinicsController extends AppController {
         if($this->request->is('post')) {
             $this->Clinic->create();   
             $clinic = $this->request->data;
-            $clinic['Clinic']['user_id'] = $this->Auth->user('id');
+            
+            if(!empty($this->request->data['Clinic']['image'])) {
+                 $image = $this->request->data['Clinic']['image'];
+                 $imageName = time() . "_" . $image['name']; 
+                 $clinic['Clinic']['image'] = $imageName;
+                 
+                 //Copy uploaded file
+                 move_uploaded_file($image['tmp_name'],  WWW_ROOT . DS . 'files' . DS . $imageName);
+            }
+          
+            $clinic['Clinic']['user_id'] = $this->Auth->user('id');   
+  
             if($this->Clinic->save($clinic)) {
+                
                 $this->Session->setFlash(__('The Clinic has been added'));
-                return $this->redirect(array('action' => 'index'));
+                //return $this->redirect(array('action' => 'index'));
+                $this->set('clinic',$clinic);
             }
             $this->Session->setFlash(__('Unable to add new clinic'));
         }
@@ -170,6 +183,16 @@ class ClinicsController extends AppController {
 
         if ($this->request->is(array('post', 'put'))) {
             $this->Clinic->id = $id;
+            
+            if(!empty($this->request->data['Clinic']['image'])) {
+            $image = $this->request->data['Clinic']['image'];
+            $imageName = time() . "_" . $image['name']; 
+            $this->request->data['Clinic']['image'] = $imageName;
+
+            //Copy uploaded file
+            move_uploaded_file($image['tmp_name'],  WWW_ROOT . DS . 'files' . DS . $imageName);
+            }
+            
             if ($this->Clinic->save($this->request->data)) {
                 $this->Session->setFlash(__('Clinic has been updated.'));
                 return $this->redirect(array('action' => 'index'));
@@ -177,6 +200,7 @@ class ClinicsController extends AppController {
             $this->Session->setFlash(__('Unable to update clinic.'));
         } else {
            $this->request->data = $clinic;
+           $this->set('image', $clinic['Clinic']['image']);
         }
     }
 

@@ -9,9 +9,21 @@
 root { 
     display: block;
 }
+body {
+    padding: 0;
+    margin: 0 auto;
+}
+#banner {
+    padding: 30px;
+    margin: 0 auto;
+    background-color: #fcf8e3;
+}
 .comment_block {
     display:none;
 }
 .hide_comment {
     display:none;
+}
+#footer {
+    margin-top: 460px;
 }

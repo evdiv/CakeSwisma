@@ -5,7 +5,7 @@
 <?php $this->start('sidebar');
 
     echo $this->element('sidebar/recent_posts', $posts);
-    echo $this->element('sidebar/recent_comments');
+    //echo $this->element('sidebar/recent_comments');
     
     $this->end(); ?>
 

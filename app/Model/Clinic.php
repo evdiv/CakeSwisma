@@ -64,5 +64,6 @@ class Clinic extends AppModel {
                 ),
                 array('Clinic.id' => $clinicId)
         );
-	} 
+	}
+        
 }

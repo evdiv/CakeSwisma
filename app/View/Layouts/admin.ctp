@@ -29,7 +29,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                     
                     <div class="navbar-header">
        
-                        <?php echo $this->Html->link('Swisma', array('controller' => 'pages', 'action' => 'index', 'admin' => false), array('class' => 'navbar-brand')); ?>
+                        <?php echo $this->Html->link('Swisma', array('controller' => 'clinics', 'action' => 'index', 'admin' => false), array('class' => 'navbar-brand')); ?>
                     </div>
                     
                     <ul class="nav navbar-nav">  
