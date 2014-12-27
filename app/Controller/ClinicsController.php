@@ -11,7 +11,7 @@
 class ClinicsController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view');
+        $this->Auth->allow('index', 'view', 'add');
         
         // Load Post Model for sidebar menu
         $this->loadModel('Post');
@@ -40,19 +40,25 @@ class ClinicsController extends AppController {
             if(isset($this->request->data['Review'])) {
                 //If the user not registered the form with registration fields is shown
                 //after it is submitted data is saved in the two models: User and Review
-                //after that user logged in automaticaly
+                //after that user logged in automatically
                 if(!$this->Auth->loggedIn()) {
                     if($this->Clinic->Review->saveAssociated($this->request->data)) {
                         
                         $clinicId = $this->request->data['Review']['clinic_id'];
-                        $this->Clinic->updateRank($clinicId); 
-                        
+                        $this->Clinic->updateRank($clinicId);
+
+                        $userId = $this->Clinic->User->id;
+
+                        $this->request->data['User'] = array_merge(
+                            $this->request->data['User'],
+                            array('id' => $userId));
                         $this->Auth->login($this->request->data['User']);
+
                         $this->Session->setFlash(__('Your Review has been added'));
-                        return $this->redirect(array('action' => 'view', $id));  
+                        return $this->redirect(array('action' => 'view', $clinicId));
                     }                        
                 } else {
-                    //If user loggedin the Review model created
+                    //If user logged the Review model created
                     $this->Clinic->Review->create();
                     if($this->Clinic->Review->save($this->request->data)) {
  
@@ -92,6 +98,35 @@ class ClinicsController extends AppController {
         $this->Clinic->updateViews($clinic);
     }
 
+    public function add() {
+        if($this->request->is('post')) {
+
+            $this->Clinic->create();
+            $clinic = $this->request->data;
+
+            if(!empty($this->request->data['Clinic']['image'])) {
+                $image = $this->request->data['Clinic']['image'];
+                $imageName = time() . "_" . $image['name'];
+                $clinic['Clinic']['image'] = $imageName;
+
+                //Copy uploaded file
+                move_uploaded_file($image['tmp_name'],  WWW_ROOT . DS . 'files' . DS . $imageName);
+            }
+
+            $clinic['Clinic']['user_id'] = $this->Auth->user('id');
+
+            if($this->Clinic->save($clinic)) {
+
+                $this->Session->setFlash(__('The Clinic has been added'));
+                //return $this->redirect(array('action' => 'index'));
+                $this->set('clinic', $clinic);
+            } else {
+                $this->Session->setFlash(__('Unable to add new clinic'));
+            }
+
+        }
+    }
+
     public function admin_index($id = null) {
        if(!$id) {
           $this->Clinic->recursive = 1;
@@ -116,6 +151,7 @@ class ClinicsController extends AppController {
 
     public function admin_add() {
         if($this->request->is('post')) {
+
             $this->Clinic->create();   
             $clinic = $this->request->data;
             
@@ -135,8 +171,10 @@ class ClinicsController extends AppController {
                 $this->Session->setFlash(__('The Clinic has been added'));
                 //return $this->redirect(array('action' => 'index'));
                 $this->set('clinic',$clinic);
+            } else {
+                $this->Session->setFlash(__('Unable to add new clinic'));
             }
-            $this->Session->setFlash(__('Unable to add new clinic'));
+
         }
     }
 
