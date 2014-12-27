@@ -86,8 +86,8 @@ $this->end(); ?>
                     'clinic_id' => $review['clinic_id']
                 )); ?> 
              <?php endif; ?>   
-                
-                
+
+
             </div>
                         
          </div>  
@@ -97,9 +97,7 @@ $this->end(); ?>
 
     <?php endforeach; ?>
       </div>
-</div>                
-                
-
+</div>
 
 
 <h2>Add your Review</h2>

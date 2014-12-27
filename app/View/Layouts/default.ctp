@@ -52,10 +52,11 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
             <li><?php echo $this->Html->link('All clinics', array('controller' => 'clinics', 'action' => 'index')); ?> </li>                                      
 
-       </ul>    
+       </ul>
+
        <ul class="nav navbar-nav navbar-right">      
              <?php if ($logged_in): ?>  
-                <li><?php echo $this->Html->link($current_user['full_name'], array('controller' => 'users', 'action' => 'view', $current_user['id'])); ?></li>            
+                <li><?php echo $this->Html->link($current_user['full_name'], array('controller' => 'users', 'action' => 'view', $current_user['id'])); ?></li>
                 <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li> 
                 <li><?php echo $this->Html->link('Admin', array('controller' => 'users', 'action' => 'index', 'admin' => true)); ?> </li> 
 

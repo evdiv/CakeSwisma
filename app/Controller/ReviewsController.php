@@ -20,6 +20,7 @@ class ReviewsController extends AppController {
         public function add() {
             if($this->request->is('post')) {
                 $this->Review->create();
+
                     if($this->Review->save($this->request->data)) {
                         $this->Session->setFlash(__('The Review has been added'));
                         return $this->redirect(array('controller' => 'pages', 'action' => 'index'));

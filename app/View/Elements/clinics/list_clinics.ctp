@@ -13,7 +13,7 @@
                 $clinic['Clinic']['image'], array('width' => 100, 'height' => 100, 'class' => 'img-rounded')) 
                 : $this->Html->image('/files/' . 
                 'empty.png', array('width' => 100, 'height' => 100, 'class' => 'img-rounded')) ; ?>
-</td>
+        </td>
         
         <td>
             

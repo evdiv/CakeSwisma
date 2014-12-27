@@ -1,4 +1,3 @@
-<?php //echo '<pre>', print_r($clinic), '</pre>'; ?>
 <h1>Add Clinic</h1>
 
 
