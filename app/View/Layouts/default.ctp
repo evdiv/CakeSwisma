@@ -15,6 +15,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
                 echo $this->Html->css('bootstrap.min');
                 echo $this->Html->css('styles');
+                echo $this->Html->css('font-awesome/css/font-awesome.min');
+
                 
                 echo $this->Html->script('jquery-1.11.0.min');                
                 echo $this->Html->script('bootstrap.min');                
@@ -73,7 +75,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 <h3 class="media-heading">Swisma Reviews</h3>
                 <p>This webapp has been created with amazing framework CakePHP. The idea is connected local businesses with customers. 
                 Customers can add reviews, and rate businesses thereby helping others</p>
-                <p><a class="btn btn-primary btn-lg" href="https://github.com/evdiv/CakeSwisma">github.com/evdiv/CakeSwisma</a></p>
+
+                <p><?php echo $this->Html->link('<i class="fa fa-plus-circle"></i> Add Clinic',
+                                            array('controller' => 'clinics', 'action' => 'add'),
+                                            array('class' => 'btn btn-primary btn-lg',
+                                                  'escape' => false)); ?>
+                <p>
+
             </div>
             <div class="col-md-8">
                 
@@ -90,6 +98,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
     </div>
     <div id="footer">
+
 
     </div>
 </div>
